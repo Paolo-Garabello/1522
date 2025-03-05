@@ -1,9 +1,10 @@
 import { SECRET } from '$env/static/private';
 import type { Actions } from './$types';
-import { openCon } from '$lib/server/mysql.js';
+import { openCon } from '$lib/server/utility.js';
 import mysql from "mysql2/promise";
 import jwt from 'jsonwebtoken';
 import { sha512 } from 'js-sha512';
+import { LogIn, Challenge, Key, SingUp } from "$lib/server/utility";
 
 export async function load({ cookies }) {
     const errRes = {logged: false, email: "email", name: "name", surname: "surname", role: "role", tickets: []};
@@ -66,5 +67,20 @@ export const actions = {
             conn.end();
             console.log(error);
         }
+    },
+    challenge: async ({request}) => {
+        return Challenge(request);
+    },
+    login: async ({ cookies, request}) => {
+        return await LogIn(cookies, request);
+    },
+    key: async () => {
+        return Key();
+    },
+    signup: async ({cookies, request}) => {
+        return SingUp(cookies, request);
+    },
+    signout: async ({cookies}) => {
+        cookies.delete("session", {path: "/"});
     }
-}
+} satisfies Actions;

@@ -1,8 +1,9 @@
 import type { Actions } from './$types';
-import { openCon } from '$lib/server/mysql';
+import { openCon } from '$lib/server/utility';
 import jwt from "jsonwebtoken";
 import { SECRET } from '$env/static/private';
 import mysql from "mysql2/promise";
+import { LogIn, Challenge, Key, SingUp } from "$lib/server/utility";
 
  
 export async function load({ cookies }) {
@@ -46,5 +47,20 @@ export const actions = {
 			conn.end();
 			return error;
 		}
+	},
+	challenge: async ({request}) => {
+		return Challenge(request);
+	},
+	login: async ({ cookies, request}) => {
+		return await LogIn(cookies, request);
+	},
+	key: async () => {
+		return Key();
+	},
+	signup: async ({cookies, request}) => {
+		return SingUp(cookies, request);
+	},
+	signout: async ({cookies}) => {
+		cookies.delete("session", {path: "/"});
 	}
 } satisfies Actions;	

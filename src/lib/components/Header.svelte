@@ -10,7 +10,7 @@
 <header>
     <div>
         <a href="/#{"Info"}">Info</a>
-        <a href="/#{"Credii"}">Crediti</a>
+        <a href="/#{"Crediti"}">Crediti</a>
         <a href="/ticket">Ticket</a>
         <span>
             <button onclick={toggleForm}>{logged ? "Area Personale" : "Login"}</button>

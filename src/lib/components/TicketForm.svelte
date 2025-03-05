@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Header from "./Header.svelte";
 
     export let data: {logged: boolean, name: string, surname: string, email:string};
     let name:string, surname:string, email:string;
@@ -11,7 +10,6 @@
     }
 </script>
 
-<Header {logged}/>
 <form method="POST" action="?/open">
     <h1>Nuovo Ticket</h1>
     <label>

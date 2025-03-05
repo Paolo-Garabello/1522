@@ -1,5 +1,6 @@
 <script lang="ts">
     import { deserialize } from '$app/forms';
+	import { goto } from '$app/navigation';
     let { logged = $bindable(), display=$bindable()} = $props();
 
     async function signout()  {
@@ -7,6 +8,7 @@
         if (deserialize(await res.text()).type === 'success') {
             display = false;
             logged = false;
+            goto("/");
         }
     }
 </script>

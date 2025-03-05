@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Header from '$lib/components/Header.svelte';
 	import Ticket from '$lib/components/Ticket.svelte';
 
     let { data } = $props();
@@ -9,10 +8,11 @@
         addOp = !addOp;
     }
 
+    let logged = $state(data.logged);
+
 </script>
 <section>
-    {#if data.logged}
-        <Header logged={data.logged}/>
+    {#if logged}
         <h1>Ciao {data.name}, Benvenuto nella tua area personale
             {#if data.role == "admin"}
             <button onclick={addop} class="add"><img src="/add.svg" alt="add"></button>
@@ -38,7 +38,7 @@
             <button>Add</button>
         </form>
         <article>
-            {#each data.tickets as ticket}
+            {#each (data.tickets as any) as ticket}
                 <Ticket data={ticket as any} role={data.role}/>
             {/each}
         </article>

@@ -2,11 +2,8 @@
 	import Header from '$lib/components/Header.svelte';
 	import Tile from '$lib/components/Tile.svelte';
 
-	let { data } = $props();
-	let logged = $state(data.logged);
+	
 </script>
-
-<Header bind:logged={logged}/>
 
 <Tile
 	title="Il 1522"
