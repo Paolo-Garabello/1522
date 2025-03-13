@@ -37,7 +37,6 @@ export const actions = {
 		const conn = await openCon();
 		try {       
 			const [op] = await conn.query<mysql.RowDataPacket[]>("SELECT u.id op, COUNT(t.id) as openTicket FROM users u LEFT JOIN tickets t ON u.id = t.assigned AND t.open = 1 WHERE u.role = 'operator' GROUP BY u.id ORDER BY openTicket ASC LIMIT 1;");
-			console.log(op);
 			conn.query("INSERT INTO tickets(name, surname, email, title, description, assigned) VALUES(?,?,?,?,?,?);", [data.get("name"), data.get("surname"), data.get("email"), data.get("title"), data.get("description"), op[0].op]);
 			conn.end();
 			return { success: true };

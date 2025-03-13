@@ -1,8 +1,5 @@
 <script lang="ts">
-	import Header from '$lib/components/Header.svelte';
 	import Tile from '$lib/components/Tile.svelte';
-
-	
 </script>
 
 <Tile
